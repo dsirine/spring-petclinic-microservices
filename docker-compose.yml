@@ -9,8 +9,8 @@ services:
      - 8888:8888
 
   discovery-server:
-    image: springcloud
-    container_name: eureka
+    image: springcommunity
+    container_name: spring-petclinic-discovery-server
     mem_limit: 512M
     depends_on:
       - config-server
