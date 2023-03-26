@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petclinic-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  namespace: petclinic
+spec:
+  ingressClassName: traefik
+  tls:
+  - secretName: petclinic-secret
+    hosts:
+      - capstone.formation-datascientest.cloudns.ph
+  rules:
+  - host: capstone.formation-datascientest.cloudns.ph
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+             service:
+              name: discovery-server-svc
+              port:
+                number: 31526
