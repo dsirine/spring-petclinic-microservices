@@ -32,13 +32,13 @@ pipeline {
         sh 'curl http://localhost:8888/'
         sh 'curl http://localhost:8761/'
         sh 'curl http://localhost:9090/'
-        sh 'curl http://localhost:8085/actuator/info'
-        sh 'curl http://localhost:8081/actuator/info'
+        sh 'curl http://localhost:8085/'
+        sh 'curl http://localhost:8081/'
         sh 'curl http://localhost:3000/'
         sh 'curl http://localhost:9091/'
         sh 'curl http://localhost:9411/'
-        sh 'curl http://localhost:8083/actuator/info'
-        sh 'curl http://localhost:8082/actuator/info'
+        sh 'curl http://localhost:8083/'
+        sh 'curl http://localhost:8082/'
       }
     }
   }
