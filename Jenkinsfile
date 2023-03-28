@@ -32,7 +32,7 @@ pipeline {
         sh 'curl http://localhost:8888/'
         sh 'curl http://localhost:8761/'
         sh 'curl http://localhost:9090/'
-        sh 'curl http://localhost:8085/'
+        sh 'curl http://localhost:8080/'
         sh 'curl http://localhost:8081/'
         sh 'curl http://localhost:3000/'
         sh 'curl http://localhost:9091/'
