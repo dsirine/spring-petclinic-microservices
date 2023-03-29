@@ -32,9 +32,16 @@ pipeline {
         sh 'aws --version'
       }
     }
-    stage('cloudformation-aws') {
+    stage('Deploy to AWS') {
       steps {
-        sh './run_cloudformation.sh'
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]]) {
+          sh './run_cloudformation.sh'
+        }
       }
     }
   }
