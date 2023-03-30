@@ -1,5 +1,6 @@
 Description: >
     BENSALEM SIRINE / Project CloudFormation HA
+
 Parameters:
     
     EnvironmentName:
@@ -32,7 +33,8 @@ Parameters:
         Default: 10.0.3.0/24
 
     InstanceType:
-        Description: "The EC2 instance type of general purpose"
+        Description: 
+            "The EC2 instance type of general purpose"
         Type: String
         AllowedValues: [t2.medium, t3.small, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge]
 
@@ -219,7 +221,7 @@ Resources:
         Properties:
             PolicyName: AmazonS3ReadOnlyAccess
             PolicyDocument:
-                Version: '2023-03-30'
+                Version: '2012-10-17'
                 Statement:
                 - 
                     Effect: "Allow"
@@ -278,7 +280,7 @@ Resources:
             UserData: 
                 Fn::Base64: !Sub |
                     #!/bin/bash
-                    aws s3 cp s3://petclinics3
+                    aws s3 cp s3://hapetclinics3
 
             ImageId: ami-05e8e219ac7e82eba
             IamInstanceProfile: !Ref RootInstanceProfile
