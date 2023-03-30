@@ -12,7 +12,7 @@ pipeline {
           docker version
           docker info
           docker compose version
-          curl --version
+          aws --version
         '''  
        }
     }
@@ -25,11 +25,6 @@ pipeline {
       steps {
         sh 'docker-compose up -d'
         sh 'docker-compose ps'
-      }
-    }
-    stage('check version') {
-      steps {
-        sh 'aws --version'
       }
     }
     stage('Deploy to AWS') {
