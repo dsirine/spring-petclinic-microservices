@@ -46,7 +46,7 @@ pipeline {
       sh 'docker-compose ps'
     }
     cleanup {
-      sh 'aws cloudformation delete-stack --stack-name petclinic'
+      sh 'aws cloudformation delete-stack --stack-name petclinic --region eu-west-3'
     }
   }
 }
