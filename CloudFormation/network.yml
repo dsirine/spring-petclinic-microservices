@@ -1,5 +1,5 @@
 Description: >
-    Dridi Sirine / Project CloudFormation HA
+    BENSALEM SIRINE / Project CloudFormation HA
 Parameters:
     
     EnvironmentName:
@@ -204,7 +204,7 @@ Resources:
             RoleName: 
                 !Sub ${EnvironmentName}-Role
             AssumeRolePolicyDocument:
-                Version: "2012-10-17"
+                Version: "2023-03-30"
                 Statement:
                 -   Effect: Allow
                     Principal:
@@ -219,7 +219,7 @@ Resources:
         Properties:
             PolicyName: AmazonS3ReadOnlyAccess
             PolicyDocument:
-                Version: '2012-10-17'
+                Version: '2023-03-30'
                 Statement:
                 - 
                     Effect: "Allow"
@@ -278,7 +278,7 @@ Resources:
             UserData: 
                 Fn::Base64: !Sub |
                     #!/bin/bash
-                    aws s3 cp s3://haudacitys3
+                    aws s3 cp s3://petclinics3
 
             ImageId: ami-05e8e219ac7e82eba
             IamInstanceProfile: !Ref RootInstanceProfile

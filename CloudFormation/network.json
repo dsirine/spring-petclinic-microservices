@@ -1,7 +1,7 @@
 [
     {
         "ParameterKey": "EnvironmentName",
-        "ParameterValue":"UdacityProjectHA"
+        "ParameterValue":"PetclinicProjectHA"
     },
     {
         "ParameterKey": "VpcCIDR",
