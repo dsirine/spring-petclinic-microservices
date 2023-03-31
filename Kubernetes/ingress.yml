@@ -21,67 +21,67 @@ spec:
              service:
               name: discovery-server-svc
               port:
-                number: 31685
+                number: 30756
         - path: /config-server
           pathType: Prefix
           backend:
              service:
               name: config-server-svc
               port:
-                number: 31567
+                number: 30649
         - path: /tracing-server
           pathType: Prefix
           backend:
              service:
               name: tracing-server-svc
               port:
-                number: 32193
+                number: 32669
         - path: /grafana-server
           pathType: Prefix
           backend:
              service:
               name: grafana-server-svc
               port:
-                number: 32380                
+                number: 31545                
         - path: /prometheus-server
           pathType: Prefix
           backend:
              service:
               name: prometheus-server-svc
               port:
-                number: 30098
+                number: 31580
         - path: /api-gateway
           pathType: Prefix
           backend:
              service:
               name: api-gateway-svc
               port:
-                number: 32433 
+                number: 30244 
         - path: /admin-server
           pathType: Prefix
           backend:
              service:
               name: admin-server-svc
               port:
-                number: 32401   
+                number: 32732   
         - path: /vets-service
           pathType: Prefix
           backend:
              service:
               name: vets-service-svc
               port:
-                number: 32764   
+                number: 31338   
         - path: /visits-service
           pathType: Prefix
           backend:
              service:
               name: visits-service-svc
               port:
-                number: 30243     
+                number: 32175     
         - path: /customers-server
           pathType: Prefix
           backend:
              service:
               name: customers-server-svc
               port:
-                number: 31834                                                                 
+                number: 32603                                                                 
