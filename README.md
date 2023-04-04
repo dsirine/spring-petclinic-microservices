@@ -33,7 +33,15 @@ and now:
 You can check the url of jenkins on http://localhost:9999
 ```
 ## Cloudformation
+To build our infrastructure , you can execute this command from CloudFormation folder
+`aws cloudformation create-stack --stack-name petclinic --region eu-west-3 --template-body file://network.yml --parameters file://network.json --capabilities CAPABILITY_NAMED_IAM`
 ## Kubernetes
+In order to deploy our project in K8S, you should install all ressources via Helm Chart by executing the script run_kubernetes.sh as follow:
+`chmod +x run_kubernetes.sh`\n
+`./run_kubernetes.sh`\n
+you can check all ressources in petclinic namespace:
+`kubens petclinic`\n
+`kubectl get all`\n
 ## Monitoring
 ## Custom metrics monitoring
 
