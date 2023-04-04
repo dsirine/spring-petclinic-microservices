@@ -40,6 +40,10 @@ and now:
 You can check the url of jenkins on http://localhost:9999  
 
 ```
+#### Integrate GitHub Repository to Jenkins: 
+
+To integrate Jenkins and GitHub to improve the efficiency of building, testing, and deploying your code, you should to schedule your build, pull code and data files from GitHub repository to Jenkins machine, by adding the select Pushes trigger event with my repository and you have to install ngrok to give public url.
+
 ## Cloudformation
 To build our infrastructure , you can execute this command from CloudFormation folder  
 
