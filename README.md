@@ -1,11 +1,8 @@
 ## Starting services locally with docker-compose
-In order to start entire infrastructure using Docker, you have to build images by executing `./mvnw clean install -P buildDocker` 
-from a project root. Once images are ready, you can start them with a single command
-`docker-compose up`. Containers startup order is coordinated with [`dockerize` script](https://github.com/jwilder/dockerize). 
-After starting services, it takes a while for API Gateway to be in sync with service registry,
-so don't be scared of initial Spring Cloud Gateway timeouts. You can track services availability using Eureka dashboard
-available by default at http://localhost:8761.
-
+In order to start entire infrastructure using Docker, you have to build images by executing from a project root:
+`./mvnw clean install -P buildDocker` 
+`docker-compose up`. 
+ You can reach all services as following:
 * Discovery Server - http://localhost:8761
 * Config Server - http://localhost:8888
 * AngularJS frontend (API Gateway) - http://localhost:8080
@@ -15,16 +12,6 @@ available by default at http://localhost:8761.
 * Grafana Dashboards - http://localhost:3000
 * Prometheus - http://localhost:9091
 
-## Understanding the Spring Petclinic application
-
-You can then access petclinic here: http://localhost:8080/
-
-![Spring Petclinic Microservices screenshot](docs/application-screenshot.png)
-
-
-**Architecture diagram of the Spring Petclinic Microservices**
-
-![Spring Petclinic Microservices architecture](docs/microservices-architecture-diagram.jpg)
 ### Start a MySql database
 
 You may start a MySql database with docker:
@@ -33,7 +20,21 @@ You may start a MySql database with docker:
 docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
 ```
 or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA), which can be found here: https://dev.mysql.com/downloads/
+## Jenkins
+We Are Going To Change Jenkins Port Number From 8080 To Any Port Number(9999), To Avoid Conflict Of Other Services.
+Because Default Port No. 8080 For Jenkins and Many Other Services Is Same
+`nano /etc/default/jenkins`
+change `HTTP_PORT = 8080` to `HTTP_PORT = 9999`
+save file and now change Dir. to `sudo nano /lib/systemd/system/jenkins.service`
+change Environment ="JENKINS_PORT=8080" to Previously written Port No.
+`Environment="JENKINS_PORT=9999"`
+and now:
+`sudo systemctl restart jenkins.service` 
+You can check the url of jenkins on http://localhost:9999
 
+## Cloudformation
+## Kubernetes
+## Monitoring
 ## Custom metrics monitoring
 
 Grafana and Prometheus are included in the `docker-compose.yml` configuration, and the public facing applications
