@@ -23,14 +23,22 @@ or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA)
 ## Jenkins
 In order to change Jenkins Port Number From 8080 To Any Port Number(9999), to Avoid Conflict Of Other Services because Default Port No. 8080 For Jenkins and many Other services is same, you can just follow this steps: 
 ```
-`nano /etc/default/jenkins`
-change `HTTP_PORT = 8080` to `HTTP_PORT = 9999`
-save file and now change Dir. to `sudo nano /lib/systemd/system/jenkins.service`
-change Environment ="JENKINS_PORT=8080" to Previously written Port No.
-`Environment="JENKINS_PORT=9999"`
-and now:
-`sudo systemctl restart jenkins.service` 
-You can check the url of jenkins on http://localhost:9999
+`nano /etc/default/jenkins`  
+
+change `HTTP_PORT = 8080` to `HTTP_PORT = 9999`  
+
+save file and now change Dir. to `sudo nano /lib/systemd/system/jenkins.service`  
+
+change Environment ="JENKINS_PORT=8080" to Previously written Port No.  
+
+`Environment="JENKINS_PORT=9999"`  
+
+and now:  
+
+`sudo systemctl restart jenkins.service`  
+
+You can check the url of jenkins on http://localhost:9999  
+
 ```
 ## Cloudformation
 To build our infrastructure , you can execute this command from CloudFormation folder  
@@ -41,8 +49,10 @@ In order to deploy our project in K8S, you should install all ressources via Hel
 
 `chmod +x run_kubernetes.sh`  
 
-`./run_kubernetes.sh`
-you can check all ressources in petclinic namespace:
+`./run_kubernetes.sh`  
+
+you can check all ressources in petclinic namespace:  
+
 `kubens petclinic`  
 
 `kubectl get all`  
