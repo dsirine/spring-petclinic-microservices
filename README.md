@@ -1,6 +1,6 @@
 ## Starting services locally with docker-compose
 In order to start entire infrastructure using Docker, you have to build images by executing from a project root:
-`./mvnw clean install -P buildDocker` 
+`./mvnw clean install -P buildDocker` then
 `docker-compose up`. 
  You can reach all services as following:
 * Discovery Server - http://localhost:8761
@@ -21,8 +21,8 @@ docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:
 ```
 or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA), which can be found here: https://dev.mysql.com/downloads/
 ## Jenkins
-We Are Going To Change Jenkins Port Number From 8080 To Any Port Number(9999), To Avoid Conflict Of Other Services.
-Because Default Port No. 8080 For Jenkins and Many Other Services Is Same
+In order to change Jenkins Port Number From 8080 To Any Port Number(9999), to Avoid Conflict Of Other Services because Default Port No. 8080 For Jenkins and many Other services is same, you can just follow this steps: 
+```
 `nano /etc/default/jenkins`
 change `HTTP_PORT = 8080` to `HTTP_PORT = 9999`
 save file and now change Dir. to `sudo nano /lib/systemd/system/jenkins.service`
@@ -31,7 +31,7 @@ change Environment ="JENKINS_PORT=8080" to Previously written Port No.
 and now:
 `sudo systemctl restart jenkins.service` 
 You can check the url of jenkins on http://localhost:9999
-
+```
 ## Cloudformation
 ## Kubernetes
 ## Monitoring
