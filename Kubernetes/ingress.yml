@@ -2,86 +2,28 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: petclinic-ingress
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
   namespace: petclinic
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: traefik
-  tls:
-  - secretName: petclinic-secret
-    hosts:
-      - capstone.formation-datascientest.cloudns.ph
+  ingressClassName: nginx
   rules:
-  - host: capstone.formation-datascientest.cloudns.ph
+  - host: petclinic.formation-datascientest.cloudns.ph
     http:
       paths:
-        - path: /
+        - path: '/discovery-server(/|$)(.*)'
           pathType: Prefix
           backend:
              service:
-              name: discovery-server-svc
+              name: discovery-server
               port:
-                number: 30756
-        - path: /config-server
+                number: 8761   
+        - path: '/config-server(/|$)(.*)'
           pathType: Prefix
           backend:
              service:
-              name: config-server-svc
+              name: config-server
               port:
-                number: 30649
-        - path: /tracing-server
-          pathType: Prefix
-          backend:
-             service:
-              name: tracing-server-svc
-              port:
-                number: 32669
-        - path: /grafana-server
-          pathType: Prefix
-          backend:
-             service:
-              name: grafana-server-svc
-              port:
-                number: 31545                
-        - path: /prometheus-server
-          pathType: Prefix
-          backend:
-             service:
-              name: prometheus-server-svc
-              port:
-                number: 31580
-        - path: /api-gateway
-          pathType: Prefix
-          backend:
-             service:
-              name: api-gateway-svc
-              port:
-                number: 30244 
-        - path: /admin-server
-          pathType: Prefix
-          backend:
-             service:
-              name: admin-server-svc
-              port:
-                number: 32732   
-        - path: /vets-service
-          pathType: Prefix
-          backend:
-             service:
-              name: vets-service-svc
-              port:
-                number: 31338   
-        - path: /visits-service
-          pathType: Prefix
-          backend:
-             service:
-              name: visits-service-svc
-              port:
-                number: 32175     
-        - path: /customers-server
-          pathType: Prefix
-          backend:
-             service:
-              name: customers-server-svc
-              port:
-                number: 32603                                                                 
+                number: 8888
+                                                                                                                                                       
