@@ -35,9 +35,16 @@ pipeline {
         }
       }
     }
-    stage ('Check the cluster'){
-      steps  {
-        sh 'eksctl get cluster'
+    stage('Check the cluster') {
+      steps {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]]) {
+          sh 'eksctl get cluster'
+        }
       }
     }
     stage ('Enable to connect to the cluster'){
