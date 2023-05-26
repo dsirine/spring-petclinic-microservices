@@ -33,14 +33,14 @@ pipeline {
           credentialsId: 'petclinic'
         ]])
         {
-            sh "eksctl create cluster --name petclinic --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed"
+            sh "eksctl create cluster --name project --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed"
         }
 
       }
     }
     stage ('Enable to connect to the cluster'){
       steps  {
-        sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
+        sh 'aws eks update-kubeconfig --name project --region eu-west-3'
       }
     }
     stage ('Deploy to EKS'){
