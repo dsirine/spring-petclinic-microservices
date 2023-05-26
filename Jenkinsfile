@@ -40,7 +40,15 @@ pipeline {
     }
     stage ('Enable to connect to the cluster'){
       steps  {
-        sh 'aws eks update-kubeconfig --name project --region eu-west-3'
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]])      
+        {
+          sh 'aws eks update-kubeconfig --name project --region eu-west-3'
+        }
       }
     }
     stage ('Deploy to EKS'){
