@@ -23,7 +23,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-
+/*
     stage('Create an EKS Cluster') {
       steps {
         withCredentials([[
@@ -38,6 +38,7 @@ pipeline {
 
       }
     }
+  */
     stage ('Enable to connect to the cluster'){
       steps  {
         withCredentials([[
@@ -53,6 +54,12 @@ pipeline {
     }
     stage ('Deploy to EKS'){
       steps  {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]])
         dir('Kubernetes') {
             sh './run_kubernetes.sh'
         }
