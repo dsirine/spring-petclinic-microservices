@@ -23,7 +23,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-/*
+
     stage('Create an EKS Cluster') {
       steps {
         withCredentials([[
@@ -38,7 +38,7 @@ pipeline {
 
       }
     }
-  */
+
     stage ('Enable to connect to the cluster'){
       steps  {
         withCredentials([[
