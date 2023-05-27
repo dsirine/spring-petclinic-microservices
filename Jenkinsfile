@@ -60,8 +60,8 @@ pipeline {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'petclinic'
         ]])
-        dir('Kubernetes') {
-            sh './run_kubernetes.sh'
+        {
+          sh './run_kubernetes.sh'
         }
       }
     }
