@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/dsirine/spring-petclinic-microservices.git'
-      }
-    }
     stage('Verify tooling') {
        steps {
         sh '''
@@ -35,7 +30,6 @@ pipeline {
         {
             sh "eksctl create cluster --name project --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed"
         }
-
       }
     }
 
@@ -61,7 +55,8 @@ pipeline {
           credentialsId: 'petclinic'
         ]])
         {
-          sh './run_kubernetes.sh'
+            git clone 'https://github.com/dsirine/spring-petclinic-microservices.git'
+            sh './run_kubernetes.sh'
         }
       }
     }
