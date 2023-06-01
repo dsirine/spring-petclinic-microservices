@@ -15,6 +15,7 @@ pipeline {
           aws --version
           eksctl version
           kubectl version --short --client
+          helm version 
         '''  
        }
     }
@@ -23,7 +24,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-
+/*
     stage('Create an EKS Cluster') {
       steps {
         withCredentials([[
@@ -33,12 +34,12 @@ pipeline {
           credentialsId: 'petclinic'
         ]])
         {
-            sh "eksctl create cluster --name project --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed"
+            sh "eksctl create cluster --name petclinic --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed"
         }
       }
     }
-
-    stage ('Enable to connect to the cluster'){
+*/
+    stage ('Deploy to EKS'){
       steps  {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -47,21 +48,10 @@ pipeline {
           credentialsId: 'petclinic'
         ]])      
         {
-          sh 'aws eks update-kubeconfig --name project --region eu-west-3'
-        }
-      }
-    }
-    stage ('Deploy to EKS'){
-      steps  {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
-        ]])
-        {
-            git clone 'https://github.com/dsirine/spring-petclinic-microservices.git'
-            sh './run_kubernetes.sh'
+          sh 'eksctl get cluster'
+          sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
+          sh 'chmod 777 run_kubernetes.sh'
+          sh './run_kubernetes.sh'
         }
       }
     }
