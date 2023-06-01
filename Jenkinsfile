@@ -11,7 +11,7 @@ pipeline {
         sh '''
           docker version
           docker info
-          docker compose version
+          docker-compose version
           aws --version
           eksctl version
           kubectl version --short --client
