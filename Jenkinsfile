@@ -13,9 +13,6 @@ pipeline {
           docker info
           docker-compose version
           aws --version
-          eksctl version
-          kubectl version --short --client
-          helm version 
         '''  
        }
     }
@@ -24,38 +21,15 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-/*
-    stage('Create an EKS Cluster') {
+    stage('Start containers') {
       steps {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
-        ]])
-        {
-            sh "eksctl create cluster --name petclinic --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed"
-        }
+        sh 'docker-compose up -d'
+        sh 'docker-compose ps'
       }
     }
-*/
-    stage ('Deploy to EKS'){
-      steps  {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
-        ]])      
-        {
-          sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
-          sh 'chmod 777 run_kubernetes.sh'
-          sh './run_kubernetes.sh'
-        }
-      }
-    }
-    stage ('curl'){
-      steps  {
+    stage('curl') {
+      steps {
+//        sh './run_cloudformation.sh'
         sh 'curl http://localhost:8761'
       }
     }
