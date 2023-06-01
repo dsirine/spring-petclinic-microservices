@@ -48,7 +48,6 @@ pipeline {
           credentialsId: 'petclinic'
         ]])      
         {
-          sh 'eksctl get cluster'
           sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
           sh 'chmod 777 run_kubernetes.sh'
           sh './run_kubernetes.sh'
