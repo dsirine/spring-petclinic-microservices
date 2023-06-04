@@ -33,7 +33,7 @@ pipeline {
           $class: 'AmazonWebServicesCredentialsBinding',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
+          credentialsId: 'aws_key'
         ]]) {
           sh 'eksctl create cluster --name project --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.medium --nodes 3 --nodes-min 1 --nodes-max 4 --managed'
         }
@@ -45,7 +45,7 @@ pipeline {
           $class: 'AmazonWebServicesCredentialsBinding',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
+          credentialsId: 'aws_key'
         ]]) {
           sh 'aws eks update-kubeconfig --name project --region eu-west-3'
         }
@@ -57,7 +57,7 @@ pipeline {
           $class: 'AmazonWebServicesCredentialsBinding',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
+          credentialsId: 'aws_key'
         ]]) {
           sh './run_kubernetes.sh'
         }
