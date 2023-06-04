@@ -27,6 +27,18 @@ pipeline {
         sh 'docker-compose ps'
       }
     }
+    stage('Enable to Cluster') {
+      steps {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'aws_key'
+        ]]) {
+          sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
+        }
+      }
+    }
     stage('Deploy to AWS') {
       steps {
         withCredentials([[
