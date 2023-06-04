@@ -35,7 +35,7 @@ pipeline {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'aws_key'
         ]]) {
-          sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
+          sh 'aws eks --kubeconfig ./.kube/config --name petclinic --region eu-west-3'
         }
       }
     }
