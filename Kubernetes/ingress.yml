@@ -4,26 +4,19 @@ metadata:
   name: petclinic-ingress
   namespace: petclinic
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
 spec:
   ingressClassName: nginx
   rules:
-  - host: petclinic.formation-datascientest.cloudns.ph
+  - host: discovery.petclinic.com
     http:
       paths:
-        - path: '/discovery-server(/|$)(.*)'
+        - path: /
           pathType: Prefix
           backend:
              service:
               name: discovery-server
               port:
-                number: 8761   
-        - path: '/config-server(/|$)(.*)'
-          pathType: Prefix
-          backend:
-             service:
-              name: config-server
-              port:
-                number: 8888
+                number: 8761
                                                                                                                                                        
